@@ -1,0 +1,62 @@
+# 2.For a given set of training data examples stored in a .CSV file, implement and demonstrate the Candidate-Elimination
+
+s=[None]*c
+g_=['?']*c
+g=[g_]
+print('s0:',s)
+print('g0:',g_)
+
+def removeFrom(g,d):
+    i=0
+    while i<len(g):
+        k=g[i]
+        f=0
+        for j in range(c):
+            if k[j]!='?':
+                if k[j]!=d[j]:
+                    g.remove(k)
+                    f=1
+                    break
+        if f==0: i+=1
+            
+def generalize(s,d):
+    for j in range(c):
+        if s[j]==None:
+            s[j]=d[j]
+        elif s[j]!=d[j]:
+            s[j]='?'
+            
+def inconsistent(k,d):
+    for j in range(c):
+        if k[j]!='?':
+            if k[j]!=d[j]:
+                return 0
+    return 1
+
+def specalize(g,d):
+    i=0
+    m=[]
+    while i<len(g):
+        k=g[i]
+        f=0
+        if inconsistent(k,d):
+            for j in range(c):
+                p=k.copy()
+                if p[j]=='?' and s[j]!='?' and s[j]!=d[j]:
+                    p[j]=s[j]
+                    m.append(p)
+            f=1
+            g.remove(k)
+        if f==0: i+=1
+    g.extend(m)
+#     g=np.unique(g,axis=0)
+    
+for i in range(r):
+    if a.loc[i]['EnjoySport']==1:
+        removeFrom(g,a.loc[i])
+        generalize(s,a.loc[i])
+    else:
+        specialize(g,a.loc[i])
+
+    print('s'+str(i+1),':',s)
+    print('g'+str(i+1),':',g)
