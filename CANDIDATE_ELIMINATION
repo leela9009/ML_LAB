@@ -1,5 +1,6 @@
 # 2.For a given set of training data examples stored in a .CSV file, implement and demonstrate the Candidate-Elimination
-
+c=len(a.columns)-1
+r=len(a)
 s=[None]*c
 g_=['?']*c
 g=[g_]
