@@ -1,0 +1,16 @@
+import pandas as pd
+a=pd.read_csv('ENJOYSPORT.csv')
+a
+r=len(a)
+c=len(a.columns)-1
+print(r,c)
+h=[None]*c
+print('h0:',h)
+for i in range(r):
+    if a.iloc[i]['EnjoySport']==1:
+        for j in range(c):
+            if h[j]==None:
+                h[j]=a.iloc[i][j]
+            elif h[j]!=a.iloc[i][j]:
+                h[j]='?'
+    print('h'+str(i+1),':',h)
