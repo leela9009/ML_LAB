@@ -56,7 +56,7 @@ for i in range(r):
         removeFrom(g,a.loc[i])
         generalize(s,a.loc[i])
     else:
-        specialize(g,a.loc[i])
+        specalize(g,a.loc[i])
 
     print('s'+str(i+1),':',s)
     print('g'+str(i+1),':',g)
