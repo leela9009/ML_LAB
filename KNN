@@ -1,0 +1,41 @@
+from sklearn.model_selection import train_test_split
+from sklearn import datasets
+import numpy as np
+
+iris=datasets.load_iris()
+x_train,x_test,y_train,y_test = train_test_split(iris.data,iris.target,test_size=0.1,random_state=15)
+
+k=int(input('Enter k: '))
+
+pred=[]
+
+for i in x_test:
+  d=[]
+  for j in x_train:
+    s=np.sqrt(np.sum((i-j)**2))
+    d.append(s)
+  indices=np.argsort(d)
+  y=y_train[indices]
+  c={}
+  for q in range(k):
+    c[y[q]]=c.get(y[q],0)+1
+  x=-1
+  z=-1
+  for key,value in c.items():
+    if value>x:
+      x=value
+      z=key
+  pred.append(z)
+
+
+
+print('Predicted labels: ',pred)
+print('Actual class labels: ',list(y_test))
+
+correct=0
+for i in range(len(pred)):
+  if pred[i]==y_test[i]:
+    correct+=1
+
+acc=(correct/len(pred))*100
+print('Accuracy = %.3f'%(acc))
